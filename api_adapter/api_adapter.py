@@ -8,8 +8,8 @@ from datetime import datetime
 # --- CONFIGURACIÓN ---
 SERIAL_PORT = 'COM7'       
 BAUD_RATE = 9600
-API_URL = "http://localhost:8080/api" 
-# API_URL = "http://bottle-filler.vercel.app/api" 
+# API_URL = "http://localhost:8080/api" 
+API_URL = "http://bottle-filler.vercel.app/api" 
 
 ser = None
 running = True
