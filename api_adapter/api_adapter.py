@@ -15,6 +15,19 @@ ser = None
 running = True
 ultimo_estado_json = {} 
 
+def listar_puertos():
+    """Lista todos los puertos seriales disponibles"""
+    import serial.tools.list_ports
+    puertos = serial.tools.list_ports.comports()
+    if puertos:
+        print("\n📌 Puertos COM disponibles:")
+        for puerto in puertos:
+            print(f"  ➤ {puerto.device} - {puerto.description}")
+        return [p.device for p in puertos]
+    else:
+        print("❌ No se encontraron puertos COM disponibles")
+        return []
+
 def conectar_arduino():
     global ser
     try:
@@ -22,7 +35,10 @@ def conectar_arduino():
         print(f"✅ Conectado a Arduino en {SERIAL_PORT}")
         return True
     except Exception as e:
-        print(f"❌ Error conectando a Arduino: {e}")
+        print(f"❌ Error conectando a Arduino en {SERIAL_PORT}: {e}")
+        print("\n💡 Sugerencia: Verifica el puerto COM correcto")
+        listar_puertos()
+        print(f"\n   Edita SERIAL_PORT en el archivo (línea 9) con el puerto correcto")
         return False
 
 # --- VISUALIZACIÓN EN CONSOLA ---
